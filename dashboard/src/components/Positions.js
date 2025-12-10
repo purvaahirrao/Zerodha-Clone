@@ -7,7 +7,7 @@ const Positions = () => {
 
   const [allPositions,setAllPositions]=useState([]);
  useEffect(()=>{
-  axios.get("https://zerodha-clone-production.up.railway.app/allPositions").then((res)=>{
+  axios.get(`${process.env.REACT_APP_BACKEND_URL}/allPositions`).then((res)=>{
    console.log(res.data);
     setAllPositions(res.data);
   })

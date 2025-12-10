@@ -6,7 +6,8 @@ const Holdings=()=>{
  
 const [allHoldings,setAllHoldings]=useState([]);
  useEffect(()=>{
-  axios.get("http://localhost:3002/allHoldings").then((res)=>{
+  // axios.get("http://localhost:3002/allHoldings").then((res)=>{
+   axios.get("https://zerodha-clone-production.up.railway.app/allHoldings").then((res)=>{
    console.log(res.data);
     setAllHoldings(res.data);
   })

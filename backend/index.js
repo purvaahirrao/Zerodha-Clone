@@ -16,10 +16,10 @@ const uri=process.env.MONGO_URL;
 const app=express();
 
 
-app.use(cors());
 app.use(cors({
-    origin: "*",
-    methods: "GET,POST,PUT,DELETE",
+    origin: "*", // or list your frontend domains
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(bodyParser.json());
 // app.get("/addHoldings",async(req,res)=>{
@@ -217,8 +217,9 @@ res.send("Order saved!");
 });
 
 
-app.listen(PORT,()=>{
-console.log("App Start");
-mongoose.connect(uri);
-console.log("db connected");
-});
+mongoose.connect(uri)
+  .then(() => {
+    console.log("DB connected");
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => console.error("DB connection error:", err));
